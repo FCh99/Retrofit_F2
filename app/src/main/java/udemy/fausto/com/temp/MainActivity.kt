@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import android.widget.Toast.LENGTH_SHORT
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -39,10 +40,11 @@ class MainActivity : AppCompatActivity() {
         GlobalScope.launch {
             try {
                 val repo = service.listRepos("FCh99")
-                println(repo)
                 val response = repo.execute()
-                val bodyString = response.body().toString()
-                println("----->bodyString: $bodyString")
+                //val bodyString = response.body()
+                val jsonString = Gson().toJson(response)
+                println("----->jsonString: $jsonString[0]")
+
 
             } catch (e: Exception) {
                 println("Exception $e")
